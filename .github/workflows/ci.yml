@@ -10,12 +10,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+    strategy:
+      matrix:
+        service: [auth, donation, logistics, needs]
 
-      - name: Show project structure
-        run: ls -R
+    steps:
+      - uses: actions/checkout@v4
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -23,5 +23,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build with Maven
+      - name: Build ${{ matrix.service }}
+        working-directory: ${{ matrix.service }}
         run: mvn -B clean install
