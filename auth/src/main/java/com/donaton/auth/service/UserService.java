@@ -1,25 +1,25 @@
 package com.donaton.auth.service;
 
-import com.donaton.auth.model.Usuario;
-import com.donaton.auth.repository.UsuarioRepository;
+import com.donaton.auth.model.User;
+import com.donaton.auth.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UsuarioService {
+public class UserService {
 
-    private final UsuarioRepository repository;
+    private final UserRepository repository;
 
-    public UsuarioService(UsuarioRepository repository) {
+    public UserService(UserRepository repository) {
         this.repository = repository;
     }
 
-    public Usuario guardar(Usuario usuario) {
-        return repository.save(usuario);
+    public User guardar(User user) {
+        return repository.save(user);
     }
 
-    public List<Usuario> listar() {
+    public List<User> listar() {
         return repository.findAll();
     }
 }
