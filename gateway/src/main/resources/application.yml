@@ -1,0 +1,48 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: ms-autenticacion
+          uri: http://localhost:8081
+          predicates:
+            - Path=/auth/**
+
+        - id: ms-donaciones
+          uri: http://localhost:8082
+          predicates:
+            - Path=/donaciones/**
+
+        - id: ms-logistica
+          uri: http://localhost:8083
+          predicates:
+            - Path=/logistica/**
+
+        - id: ms-necesidades
+          uri: http://localhost:8084
+          predicates:
+            - Path=/necesidades/**
+
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret: "dona-ton-isaveryveryvery-cool-ass-project-made-by-some-tarddsss"
