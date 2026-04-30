@@ -6,43 +6,40 @@ spring:
     name: gateway
   cloud:
     gateway:
-      routes:
-        - id: ms-autenticacion
-          uri: http://localhost:8081
-          predicates:
-            - Path=/auth/**
+      server:
+        webflux:
+          routes:
+            - id: auth
+              uri: http://auth:8080
+              predicates:
+                - Path=/auth/**
 
-        - id: ms-donaciones
-          uri: http://localhost:8082
-          predicates:
-            - Path=/donaciones/**
+            - id: donation
+              uri: http://donation:8080
+              predicates:
+                - Path=/donation/**
 
-        - id: ms-logistica
-          uri: http://localhost:8083
-          predicates:
-            - Path=/logistica/**
+            - id: logistics
+              uri: http://logistics:8080
+              predicates:
+                - Path=/logistics/**
 
-        - id: ms-necesidades
-          uri: http://localhost:8084
-          predicates:
-            - Path=/necesidades/**
+            - id: needs
+              uri: http://needs:8080
+              predicates:
+                - Path=/needs/**
 
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins:
-              - "http://localhost:3000"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-            allowedHeaders:
-              - "*"
-            allowCredentials: true
-
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          secret: "dona-ton-isaveryveryvery-cool-ass-project-made-by-some-tarddsss"
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins:
+                  - "*"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - PATCH
+                allowedHeaders:
+                  - "*"
+                allowCredentials: false
