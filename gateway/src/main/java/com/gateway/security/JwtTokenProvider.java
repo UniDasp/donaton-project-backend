@@ -26,11 +26,11 @@ public class JwtTokenProvider {
 
     public String extractEmail(String token) {
         try {
-            return Jwts.parserBuilder()
-                    .setSigningKey(getSigningKey())
+            return Jwts.parser()
+                    .verifyWith(getSigningKey())
                     .build()
-                    .parseClaimsJws(token)
-                    .getBody()
+                    .parseSignedClaims(token)
+                    .getPayload()
                     .getSubject();
         } catch (ExpiredJwtException e) {
             log.warn("Token expirado: {}", e.getMessage());
@@ -43,11 +43,11 @@ public class JwtTokenProvider {
 
     public String extractRole(String token) {
         try {
-            return (String) Jwts.parserBuilder()
-                    .setSigningKey(getSigningKey())
+            return (String) Jwts.parser()
+                    .verifyWith(getSigningKey())
                     .build()
-                    .parseClaimsJws(token)
-                    .getBody()
+                    .parseSignedClaims(token)
+                    .getPayload()
                     .get("role");
         } catch (JwtException e) {
             log.warn("Error extrayendo rol del token: {}", e.getMessage());
@@ -57,10 +57,10 @@ public class JwtTokenProvider {
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder()
-                    .setSigningKey(getSigningKey())
+            Jwts.parser()
+                    .verifyWith(getSigningKey())
                     .build()
-                    .parseClaimsJws(token);
+                    .parseSignedClaims(token);
             return true;
         } catch (ExpiredJwtException e) {
             log.warn("Token expirado");
