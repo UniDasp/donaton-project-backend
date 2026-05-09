@@ -5,12 +5,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
-@ActiveProfiles("test") // <--- Esto buscará application-test.properties
+@ActiveProfiles("test")
 class ApplicationTests {
 
 	@Test
 	void contextLoads() {
-		// Esta prueba ahora pasará porque H2 se creará en memoria
+
 	}
 
 }
