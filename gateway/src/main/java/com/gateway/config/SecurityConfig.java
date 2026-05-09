@@ -25,14 +25,12 @@ public class SecurityConfig {
     public SecurityWebFilterChain filterChain(ServerHttpSecurity http) {
         return http
                 .csrf().disable()
-                .authorizeExchange()
+                .authorizeExchange(authz -> authz
                     .pathMatchers("/auth/login", "/auth/register", "/health", "/actuator/health").permitAll()
-                    .anyExchange().authenticated()
-                .and()
+                    .anyExchange().authenticated())
                 .httpBasic().disable()
                 .formLogin().disable()
                 .logout().disable()
-                .and()
                 .build();
     }
 
