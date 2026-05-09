@@ -15,11 +15,19 @@ public class UserService {
         this.repository = repository;
     }
 
-    public User guardar(User user) {
+    public User registrar(User user) {
         return repository.save(user);
     }
 
-    public List<User> listar() {
-        return repository.findAll();
+    public User login(String email, String password) {
+
+        User user = repository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        if (!user.getPassword().equals(password)) {
+            throw new RuntimeException("Contraseña incorrecta");
+        }
+
+        return user;
     }
 }
