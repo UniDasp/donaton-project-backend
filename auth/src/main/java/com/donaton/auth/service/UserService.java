@@ -3,16 +3,18 @@ package com.donaton.auth.service;
 import com.donaton.auth.model.User;
 import com.donaton.auth.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import com.donaton.auth.security.JwtService;
 
 @Service
 public class UserService {
 
     private final UserRepository repository;
 
-    public UserService(UserRepository repository) {
+    private final JwtService jwtService;
+
+    public UserService(UserRepository repository, JwtService jwtService) {
         this.repository = repository;
+        this.jwtService = jwtService;
     }
 
     public User registrar(User user) {
