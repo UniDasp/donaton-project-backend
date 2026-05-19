@@ -3,6 +3,7 @@ package com.donaton.auth;
 import com.donaton.auth.model.Role;
 import com.donaton.auth.model.User;
 import com.donaton.auth.repository.UserRepository;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,16 +17,35 @@ public class Application {
 	}
 
 	@Bean
-	CommandLineRunner seedTestUsers(UserRepository userRepository) {
+	CommandLineRunner seedTestUsers(UserRepository userRepository, JdbcTemplate jdbcTemplate) {
 		return args -> {
+			ensureRoleConstraint(jdbcTemplate);
 			seedUser(userRepository, "admin@donaton.test", "admin123", Role.ADMIN);
 			seedUser(userRepository, "user@donaton.test", "user123", Role.USER);
+			seedUser(userRepository, "ong@donaton.test", "ong123", Role.ONG);
 		};
+	}
+
+	private void ensureRoleConstraint(JdbcTemplate jdbcTemplate) {
+		
+		
+		try {
+			jdbcTemplate.execute("ALTER TABLE users DROP CONSTRAINT IF EXISTS users_role_check");
+			jdbcTemplate.execute("ALTER TABLE users ADD CONSTRAINT users_role_check CHECK (role IN ('USER','ADMIN','ONG'))");
+		} catch (Exception ignored) {
+			
+		}
 	}
 
 	private void seedUser(UserRepository userRepository, String email, String password, Role role) {
 		userRepository.findByEmail(email)
-				.orElseGet(() -> userRepository.save(new User(null, email, password, role)));
+				.orElseGet(() -> {
+					User user = new User();
+					user.setEmail(email);
+					user.setPassword(password);
+					user.setRole(role);
+					return userRepository.save(user);
+				});
 	}
 
 }

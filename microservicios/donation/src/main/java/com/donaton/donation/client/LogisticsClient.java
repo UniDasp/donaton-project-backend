@@ -1,6 +1,8 @@
 package com.donaton.donation.client;
 
-import com.donaton.donation.dto.LogisticsRequestDTO;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -9,24 +11,25 @@ import java.util.Map;
 @Component
 public class LogisticsClient {
 
-    private final RestTemplate restTemplate;
+    private static final String INTERNAL_EMAIL = "donation@donaton.internal";
+    private static final String INTERNAL_ROLE = "ADMIN";
 
-    public LogisticsClient() {
+    private final RestTemplate restTemplate;
+    private final String baseUrl;
+
+    public LogisticsClient(@Value("${logistics.base-url:http://logistics:8080}") String baseUrl) {
+        this.baseUrl = baseUrl;
         this.restTemplate = new RestTemplate();
     }
 
-    public void crearEnvio(Long donacionId, String direccion) {
+    public void crearEnvio(Long donacionId, String email, String role) {
+        String url = baseUrl + "/envios";
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-User-Email", INTERNAL_EMAIL);
+        headers.add("X-User-Role", INTERNAL_ROLE);
+        headers.add("Content-Type", "application/json");
 
-        String url = "http://localhost:8083/envios";
-
-        Map<String, Object> request = Map.of(
-                "donacionId", donacionId,
-                "direccion", direccion
-        );
-
-        restTemplate.postForObject(url, request, String.class);
-    }
-
-    public void crearEnvio(LogisticsRequestDTO logisticsRequest) {
+        Map<String, Object> request = Map.of("donacionId", donacionId);
+        restTemplate.postForObject(url, new HttpEntity<>(request, headers), String.class);
     }
 }
