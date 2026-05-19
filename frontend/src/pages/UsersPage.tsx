@@ -4,13 +4,7 @@ import { useUsers } from '../hooks/useQueries';
 import { useAuthStore } from '../store/authStore';
 import { usersService } from '../services/usersService';
 import type { ManagedUserRecord } from '../types';
-import { AlertCircle, Plus, Search, Save, Trash2, Shield, UserPlus } from 'lucide-react';
-
-const ROLE_LABELS: Record<ManagedUserRecord['role'], string> = {
-  USER: 'Usuario',
-  ADMIN: 'Administrador',
-  ONG: 'ONG',
-};
+import { AlertCircle, Plus, Search, Save, Trash2, UserPlus } from 'lucide-react';
 
 export function UsersPage() {
   const { hasPermission } = useAuthStore();

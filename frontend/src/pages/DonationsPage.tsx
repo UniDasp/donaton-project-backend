@@ -28,6 +28,7 @@ export function DonationsPage() {
     cantidad: '',
     tipo: 'alimentos' as DonationType,
     direccion: '',
+    unit: '',
   });
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
 
@@ -39,6 +40,7 @@ export function DonationsPage() {
       descripcion: selectedDonation.descripcion ?? '',
       cantidad: String(selectedDonation.cantidad ?? ''),
       tipo: (selectedDonation.tipo as DonationType) ?? 'alimentos',
+      unit: selectedDonation.unit ?? '',
       direccion: selectedDonation.direccion ?? '',
     });
     const id = selectedDonation.id;
@@ -76,6 +78,7 @@ export function DonationsPage() {
         cantidad,
         tipo: selectedNeed.category,
         direccion,
+        unit: selectedNeed.unit,
         needId: selectedNeed.id,
       });
       return null;
@@ -103,6 +106,7 @@ export function DonationsPage() {
       return donationService.update(selectedDonation.id, {
         descripcion: editForm.descripcion.trim(),
         cantidad,
+        unit: editForm.unit,
         tipo: editForm.tipo,
         direccion: editForm.direccion.trim(),
       });

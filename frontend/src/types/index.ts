@@ -75,6 +75,7 @@ export interface ManagedUserRecord {
 export interface DonationRecord {
   id: number;
   descripcion: string;
+  unit: string;
   cantidad: number;
   tipo: string;
   direccion: string;
@@ -92,8 +93,10 @@ export interface EnvioRecord {
   id: number;
   direccion: string;
   estado: EnvioEstado | string;
+  unit: string;
   donacionId: number;
   needId?: string;
+  region: string;
   acopioCenterId?: string;
   acopioCenterName?: string;
   createdAt?: string;

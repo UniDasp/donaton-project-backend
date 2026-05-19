@@ -16,11 +16,6 @@ class DashboardService {
       ]);
 
       const totalDonations = Array.isArray(donations) ? donations.length : 0;
-      const totalEnvios = Array.isArray(envios) ? envios.length : 0;
-      const pendingEnvios = Array.isArray(envios) ? envios.filter((e: any) => e.estado !== 'entregado').length : 0;
-      const donationTypes = Array.isArray(donations)
-        ? Array.from(new Set(donations.map((d: any) => d.tipo))).length
-        : 0;
 
       return [
         { label: 'Donaciones recibidas', value: totalDonations, icon: 'Package', color: 'cyan' },
