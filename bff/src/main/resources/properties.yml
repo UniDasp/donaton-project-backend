@@ -40,7 +40,7 @@ logging:
     org.springframework.security: INFO
     org.springframework.cloud.openfeign: DEBUG
 
-
+---
 spring:
   config:
     activate:
@@ -59,6 +59,7 @@ spring:
           needs-service:
             url: http://localhost:8084
 
+---
 spring:
   config:
     activate:
