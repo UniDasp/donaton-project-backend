@@ -2,16 +2,14 @@ package com.donaton.auth.repository;
 
 import com.donaton.auth.model.Role;
 import com.donaton.auth.model.User;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class UserRepositoryImpl implements UserRepositoryPattern {
+public class UserRepositoryAdapter implements UserRepositoryPattern {
     private final UserRepository jpaRepository;
 
-    public UserRepositoryImpl(UserRepository jpaRepository) {
+    public UserRepositoryAdapter(UserRepository jpaRepository) {
         this.jpaRepository = jpaRepository;
     }
 

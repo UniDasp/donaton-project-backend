@@ -1,16 +1,14 @@
 package com.donaton.donation.repository;
 
 import com.donaton.donation.model.DonationModel;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class DonationRepositoryImpl implements DonationRepositoryPattern {
+public class DonationRepositoryAdapter implements DonationRepositoryPattern {
     private final DonationRepository jpaRepository;
 
-    public DonationRepositoryImpl(DonationRepository jpaRepository) {
+    public DonationRepositoryAdapter(DonationRepository jpaRepository) {
         this.jpaRepository = jpaRepository;
     }
 

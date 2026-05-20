@@ -1,16 +1,14 @@
 package com.donaton.needs.repository;
 
 import com.donaton.needs.model.NeedEntity;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class NeedRepositoryImpl implements NeedRepositoryPattern {
+public class NeedRepositoryAdapter implements NeedRepositoryPattern {
     private final NeedRepository jpaRepository;
 
-    public NeedRepositoryImpl(NeedRepository jpaRepository) {
+    public NeedRepositoryAdapter(NeedRepository jpaRepository) {
         this.jpaRepository = jpaRepository;
     }
 

@@ -1,17 +1,15 @@
 package com.donaton.logistics.repository;
 
 import com.donaton.logistics.model.LogisticsEnvio;
-import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class EnvioRepositoryImpl implements EnvioRepositoryPattern {
+public class EnvioRepositoryAdapter implements EnvioRepositoryPattern {
     private final EnvioRepository jpaRepository;
 
-    public EnvioRepositoryImpl(EnvioRepository jpaRepository) {
+    public EnvioRepositoryAdapter(EnvioRepository jpaRepository) {
         this.jpaRepository = jpaRepository;
     }
 
