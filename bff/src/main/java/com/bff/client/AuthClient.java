@@ -1,6 +1,5 @@
 package com.bff.client;
 
-import com.bff.config.FeignClientConfig;
 import com.bff.dto.request.AuthRequest;
 import com.bff.dto.request.RefreshRequest;
 import com.bff.dto.request.RegisterRequest;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(name = "auth-service", configuration = FeignClientConfig.class)
+@FeignClient(name = "auth-service")
 public interface AuthClient {
 
     @PostMapping("/auth/login")
