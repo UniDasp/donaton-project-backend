@@ -10,9 +10,9 @@ services:
   - type: web
     name: rabbitmq
     env: docker
-    image: rabbitmq:3.13-management
+    image:
+      url: rabbitmq:3.13-management
     plan: free
-    port: 5672
     envVars:
       - key: RABBITMQ_DEFAULT_USER
         value: myuser
@@ -25,7 +25,6 @@ services:
     dockerContext: microservicios/auth
     dockerfilePath: Dockerfile
     plan: free
-    port: 8080
     envVars:
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
@@ -56,7 +55,6 @@ services:
     dockerContext: microservicios/donation
     dockerfilePath: Dockerfile
     plan: free
-    port: 8080
     envVars:
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
@@ -85,7 +83,6 @@ services:
     dockerContext: microservicios/logistics
     dockerfilePath: Dockerfile
     plan: free
-    port: 8080
     envVars:
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
@@ -114,7 +111,6 @@ services:
     dockerContext: microservicios/needs
     dockerfilePath: Dockerfile
     plan: free
-    port: 8080
     envVars:
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
@@ -143,7 +139,6 @@ services:
     dockerContext: microservicios/gateway
     dockerfilePath: Dockerfile
     plan: free
-    port: 8080
     envVars:
       - key: JWT_SECRET
         value: mi_clave_secreta_muy_larga_para_hs256_segura_12345
@@ -154,7 +149,6 @@ services:
     dockerContext: bff
     dockerfilePath: Dockerfile
     plan: free
-    port: 8080
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: docker
@@ -169,4 +163,3 @@ services:
     dockerContext: frontend
     dockerfilePath: Dockerfile
     plan: free
-    port: 80
