@@ -14,10 +14,6 @@
 
 ## Arquitectura
 - [Microservicios](microservicios/README.md)
-  - Gateway Service
-  - Donation Service
-  - Needs Service
-  - Logistics Service
 - [BFF](bff/README.md)
 - [Frontend](frontend/README.md)
 ## Ejecutar proyecto

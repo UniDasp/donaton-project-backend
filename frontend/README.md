@@ -12,3 +12,9 @@
 
 > [!CAUTION]
 > Riesgo o posible consecuencia negativa.
+
+
+> [!NOTE]
+> Documentación sobre el Frontend
+
+
