@@ -1,4 +1,4 @@
-# Donatón
+# Donaton
 
 > [!IMPORTANT]
 > Plataforma de gestión de donaciones basada en una arquitectura de microservicios.
